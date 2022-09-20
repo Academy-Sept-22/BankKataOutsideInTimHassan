@@ -32,17 +32,18 @@ public class AccountShould {
 
     @Test
     void withdraw_money() {
-
         account.withdraw(50);
         transactionRepository.addWithdraw(50);
-
         verify(transactionRepository).addWithdraw(50);
-
     }
 
     @Test
     void print_account_statement() {
+        account.deposit(100);
+        account.withdraw(50);
+        account.printStatement();
 
+        verify(transactionRepository).getAccountHistory();
     }
 
 }

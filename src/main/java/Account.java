@@ -21,6 +21,7 @@ public class Account implements AccountService {
 
 	@Override
 	public void printStatement() {
+		transactionRepository.getAccountHistory();
 
 	}
 }

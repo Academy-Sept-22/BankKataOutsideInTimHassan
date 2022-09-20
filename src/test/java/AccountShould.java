@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -17,9 +18,9 @@ import static org.mockito.Mockito.verify;
 public class AccountShould {
 
     @Mock TransactionRepository transactionRepository;
+    @Mock StatementPrinter statementPrinter;
 
     private Account account;
-    private StatementPrinter statementPrinter;
 
     @BeforeEach
     void setup() {
@@ -41,9 +42,12 @@ public class AccountShould {
 
     @Test
     void print_account_statement() {
+        transactionRepository.addDeposit(100);
 
         account.printStatement();
-        verify(statementPrinter).print(transactionRepository.getAccountHistory());
+
+        verify(transactionRepository, atLeastOnce()).getAccountHistory();
+        verify(transactionRepository, atLeastOnce()).printAccountHistory();
     }
 
 }

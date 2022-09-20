@@ -1,7 +1,12 @@
 import java.util.ArrayList;
 
-public class StatementPrinter {
+public class StatementPrinter implements Console{
 	public String print(ArrayList<Integer> accountHistory) {
-		return null;
+		return accountHistory.toString();
+	}
+
+	@Override
+	public void printLine(String text) {
+
 	}
 }

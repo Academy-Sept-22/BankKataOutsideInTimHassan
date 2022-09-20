@@ -6,10 +6,18 @@ public class TransactionRepository {
 
     public TransactionRepository(ArrayList<Integer> accountHistory) {
         this.accountHistory = accountHistory;
+
     }
 
     public ArrayList<Integer> getAccountHistory() {
+        printAccountHistory();
         return this.accountHistory;
+    }
+
+    public void printAccountHistory() {
+        StatementPrinter statementPrinter = new StatementPrinter();
+        String printed = statementPrinter.print(accountHistory);
+        System.out.println(printed);
     }
 
 

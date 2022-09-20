@@ -15,7 +15,9 @@ public class PrintStatementFeature {
 
 	@Test
 	public void print_statement() {
-		TransactionRepository transactionRepository = new TransactionRepository(ArrayList accountHistory);
+		ArrayList<Integer> accountHistory = new ArrayList<>();
+		accountHistory.add(0);
+		TransactionRepository transactionRepository = new TransactionRepository(accountHistory);
 		Account account = new Account(transactionRepository);
 		account.withdraw(500);
 		account.deposit(2000);

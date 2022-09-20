@@ -13,7 +13,8 @@ public class PrintStatementFeature {
 
 	@Test
 	public void print_statement() {
-		Account account = new Account();
+		TransactionRepository transactionRepository = new TransactionRepository();
+		Account account = new Account(transactionRepository);
 		account.withdraw(500);
 		account.deposit(2000);
 		account.deposit(1000);

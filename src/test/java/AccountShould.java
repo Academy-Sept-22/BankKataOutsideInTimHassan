@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -5,14 +6,23 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.verify;
 
+@ExtendWith(MockitoExtension.class)
+
 public class AccountShould {
 
-    @ExtendWith(MockitoExtension.class)
-    @Mock TransactionRepository transactionRepository;
+    @Mock
+    static TransactionRepository transactionRepository;
+
+    private static Account account;
+
+    @BeforeAll
+    static void setup() {
+        account = new Account(transactionRepository);
+
+    }
 
     @Test
     void deposit_money() {
-        Account account = new Account(transactionRepository);
         account.deposit(100);
         transactionRepository.addDeposit(100);
 
@@ -22,6 +32,11 @@ public class AccountShould {
 
     @Test
     void withdraw_money() {
+
+        account.withdraw(50);
+        transactionRepository.addWithdraw(50);
+
+        verify(transactionRepository).addWithdraw(50);
 
     }
 

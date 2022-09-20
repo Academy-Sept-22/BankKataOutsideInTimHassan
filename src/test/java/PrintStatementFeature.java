@@ -4,6 +4,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 
+import java.util.ArrayList;
+
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -13,7 +15,7 @@ public class PrintStatementFeature {
 
 	@Test
 	public void print_statement() {
-		TransactionRepository transactionRepository = new TransactionRepository();
+		TransactionRepository transactionRepository = new TransactionRepository(ArrayList accountHistory);
 		Account account = new Account(transactionRepository);
 		account.withdraw(500);
 		account.deposit(2000);

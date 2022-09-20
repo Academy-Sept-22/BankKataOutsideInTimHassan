@@ -1,33 +1,35 @@
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 
 public class AccountShould {
 
-    @Mock
-    static TransactionRepository transactionRepository;
+    @Mock TransactionRepository transactionRepository;
 
-    private static Account account;
+    private Account account;
+    private StatementPrinter statementPrinter;
 
-    @BeforeAll
-    static void setup() {
+    @BeforeEach
+    void setup() {
         account = new Account(transactionRepository);
-
     }
 
     @Test
     void deposit_money() {
         account.deposit(100);
-        transactionRepository.addDeposit(100);
-
         verify(transactionRepository).addDeposit(100);
-
     }
 
     @Test
@@ -39,11 +41,9 @@ public class AccountShould {
 
     @Test
     void print_account_statement() {
-        account.deposit(100);
-        account.withdraw(50);
-        account.printStatement();
 
-        verify(transactionRepository).getAccountHistory();
+        account.printStatement();
+        verify(statementPrinter).print(transactionRepository.getAccountHistory());
     }
 
 }

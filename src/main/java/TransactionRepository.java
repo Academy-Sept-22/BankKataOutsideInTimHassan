@@ -1,9 +1,15 @@
 import java.util.ArrayList;
 
 public class TransactionRepository {
-    private ArrayList<Integer> accountHistory = new ArrayList<>();
-    public String getAccountHistory() {
-        return accountHistory.toString();
+
+    private ArrayList<Integer> accountHistory;
+
+    public TransactionRepository(ArrayList<Integer> accountHistory) {
+        this.accountHistory = accountHistory;
+    }
+
+    public ArrayList<Integer> getAccountHistory() {
+        return this.accountHistory;
     }
 
 

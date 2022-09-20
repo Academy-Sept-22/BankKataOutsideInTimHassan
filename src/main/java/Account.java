@@ -10,8 +10,6 @@ public class Account implements AccountService {
 
 	@Override
 	public void deposit(int amount) {
-
-		TransactionRepository transactionRepository = new TransactionRepository();
 		transactionRepository.addDeposit(amount);
 
 	}
